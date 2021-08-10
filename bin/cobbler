@@ -6,13 +6,14 @@ var minimist = require('minimist')
 var path = require('path')
 var temp = require('temp')
 var argv = minimist(process.argv.slice(2), {
-  string: ['input', 'output'],
+  string: ['input', 'html', 'output'],
   alias: {
+    html: ['h'],
     input: ['i'],
     output: ['o'],
   },
 })
-var tempfile = temp.path({
+var htmlpath = temp.path({
   suffix: '.html'
 })
 
@@ -29,21 +30,25 @@ if (!argv.output) {
   error('Missing argument for output PDF file.')
 }
 
+if (argv.html) {
+  htmlpath = path.resolve(process.cwd(), argv.html)
+}
+
 // No errors with our arguments? Let's proceed.
 if (process.exitCode) {
   usage()
 } else {
-  debug('Using intermediary HTML file: %s', tempfile)
+  debug('Using intermediary HTML file: %s', htmlpath)
 
   cobbler.load(path.resolve(process.cwd(), argv.input))
     .then(data => cobbler.preprocess(data))
     .then(data => cobbler.render(
       path.resolve(__dirname, '../assets/template.pug'),
       data,
-      tempfile
+      htmlpath
     ))
     .then(_ => cobbler.pdf(
-      tempfile,
+      htmlpath,
       path.resolve(process.cwd(), argv.output)
     ))
     .catch(error)
