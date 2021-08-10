@@ -20,7 +20,7 @@ mixin duration(start, end)
     | #{mDuration.humanize()}
 
 mixin gig(details, short)
-  .company
+  h3.company
     | #{details.company || details.organization}&nbsp;
     +link(details.website)
   if details.position
@@ -46,14 +46,20 @@ mixin gig(details, short)
       each item in details.highlights
         li= item
 
+mixin skillDuration(start, end)
+  if start
+    - var mStart = moment(start)
+    - var mEnd = moment(end || Date.now())
+    - var mDuration = moment.duration(mEnd.diff(mStart))
+    | #{' '}(#{mDuration.years()} years)
+
 doctype html
 head
   meta(charset="UTF-8")
   style
     include:sass /style.sass
 body
-  .logo
-    include /td-logo.svg
+  img.logo(src="https://www.schoonology.com/img/schoonology-logo.svg", alt="")
 
   if basics
     header.category
@@ -87,7 +93,7 @@ body
 
           if job.projects
             section.projects
-              h3 Featured Projects &amp; Roles
+              h4 Featured Projects &amp; Roles
 
               each project in job.projects
                 section.project
@@ -108,17 +114,26 @@ body
   if skills
     section.category
       - var skillsObj = skills.reduce((obj, skill) => {
-      -   obj[skill.level] = (obj[skill.level] || []).concat(skill.name);
+      -   obj[skill.level] = (obj[skill.level] || []).concat(skill);
       -   return obj
       - }, {})
 
       h2 Skills
 
       table
-        each skill, level in skillsObj
+        each skills, level in skillsObj
           tr.skill-level
             th= level
-            td= skill.join(', ')
+            td
+              each skill, index in skills
+                if index > 0
+                  | #{', '}
+                if (skill.keywords || []).includes('highlight')
+                  strong #{skill.name}
+                    +skillDuration(skill.startDate, skill.endDate)
+                else
+                  | #{skill.name}
+                  +skillDuration(skill.startDate, skill.endDate)
 
   if volunteer && volunteer.length
     section.category
