@@ -44,7 +44,7 @@ mixin gig(details, short)
   if details.highlights
     ul.highlights
       each item in details.highlights
-        li= item
+        li!= item
 
 mixin skillDuration(start, end)
   if start
@@ -93,7 +93,7 @@ body
 
           if job.projects
             section.projects
-              h4 Featured Projects &amp; Roles
+              h4 Featured Projects
 
               each project in job.projects
                 section.project
