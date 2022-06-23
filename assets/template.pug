@@ -20,31 +20,30 @@ mixin duration(start, end)
     | #{mDuration.humanize()}
 
 mixin gig(details, short)
-  h3.company
-    | #{details.company || details.organization}&nbsp;
-    +link(details.website)
-  if details.position
-    .position= details.position
-  if details.positions
-    each position in details.positions
-      .position= position
-  if details.startDate
-    .time
-      if short
-        +duration(details.startDate, details.endDate)
-      else
-        =details.startDate.split('-')[0]
-        | &hairsp;&ndash;&hairsp;
-        if details.endDate
-          =details.endDate.split('-')[0]
-        else
-          | Present
-  if details.summary
-    p!= details.summary
-  if details.highlights
-    ul.highlights
-      each item in details.highlights
-        li!= item
+  section.gig
+    h3.company
+      | #{details.company || details.organization}&nbsp;
+      +link(details.website)
+    if details.position
+      .position= details.position
+    if details.positions
+      each position in details.positions
+        .position= position
+    if details.startDate
+      .time
+        if !short
+          =details.startDate.split('-')[0]
+          | &hairsp;&ndash;&hairsp;
+          if details.endDate
+            =details.endDate.split('-')[0]
+          else
+            | Present
+    if details.summary
+      p!= details.summary
+    if details.highlights
+      ul.highlights
+        each item in details.highlights
+          li!= item
 
 mixin skillDuration(start, end)
   if start
@@ -112,7 +111,7 @@ body
             +gig(job)
 
   if skills
-    section.category
+    section.category.skills
       - var skillsObj = skills.reduce((obj, skill) => {
       -   obj[skill.level] = (obj[skill.level] || []).concat(skill);
       -   return obj

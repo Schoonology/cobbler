@@ -5,10 +5,11 @@ $grey50: #888888
 $white: #FFFFFF
 $type-height: 11pt
 $grid-height: 1.4 * $type-height
-$light-weight: 300
-$regular-weight: 400
-$semibold-weight: 600
 $thin-weight: 100
+$light-weight: 300
+$regular-weight: 500
+$semibold-weight: 600
+$bold-weight: 800
 
 @page
   // The green bar currently rendered as an annotation in code is 1.5pc high.
@@ -81,7 +82,7 @@ h4
   vertical-align: bottom
 
 strong
-  font-weight: $semibold-weight
+  font-weight: $bold-weight
 
 section
   margin: $grid-height 0
@@ -110,6 +111,9 @@ section
 
   ul
     list-style: circle
+
+// .gig, .project, .skills
+//   page-break-inside: avoid
 
 .skill-level
   th
