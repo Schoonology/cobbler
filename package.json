@@ -15,13 +15,13 @@
   "dependencies": {
     "cson": "^7.20.0",
     "debug": "^4.3.2",
-    "hummus": "^1.0.110",
-    "jstransformer-sass": "^1.0.0",
     "marked": "~4.0.1",
     "minimist": "^1.2.5",
     "moment": "^2.29.1",
+    "muhammara": "^4.0.0",
     "nightmare": "^3.0.2",
     "pug": "^3.0.2",
+    "puppeteer": "^21.1.0",
     "resume-schema": "^1.0.0",
     "temp": "^0.9.4",
     "traverse": "~0.6.6"
