@@ -4,17 +4,12 @@ var debug = require('debug')('cobbler')
 var fs = require('fs')
 var minimist = require('minimist')
 var path = require('path')
-var temp = require('temp')
 var argv = minimist(process.argv.slice(2), {
-  string: ['input', 'html', 'output'],
+  string: ['input', 'output'],
   alias: {
-    html: ['h'],
     input: ['i'],
     output: ['o'],
   },
-})
-var htmlpath = temp.path({
-  suffix: '.html'
 })
 
 // Let's generate some nice error messages for trivially invalid arguments.
@@ -30,25 +25,18 @@ if (!argv.output) {
   error('Missing argument for output PDF file.')
 }
 
-if (argv.html) {
-  htmlpath = path.resolve(process.cwd(), argv.html)
-}
-
 // No errors with our arguments? Let's proceed.
 if (process.exitCode) {
   usage()
 } else {
-  debug('Using intermediary HTML file: %s', htmlpath)
-
   cobbler.load(path.resolve(process.cwd(), argv.input))
     .then(data => cobbler.preprocess(data))
     .then(data => cobbler.render(
       path.resolve(__dirname, '../assets/template.pug'),
-      data,
-      htmlpath
+      data
     ))
-    .then(_ => cobbler.pdf(
-      htmlpath,
+    .then(html => cobbler.pdf(
+      html,
       path.resolve(process.cwd(), argv.output)
     ))
     .catch(error)
