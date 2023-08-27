@@ -51,6 +51,13 @@ img {
   width: 4pc;
 }
 
+.gig-logo {
+  height: 4pc;
+  left: -1in;
+  position: absolute;
+  width: 4pc;
+}
+
 h1 {
   font-weight: 100;
   font-size: 33pt;
@@ -91,6 +98,7 @@ section {
 
 .category {
   margin-left: 1in;
+  position: relative;
 }
 
 .position {

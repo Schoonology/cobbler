@@ -21,6 +21,8 @@ mixin duration(start, end)
 
 mixin gig(details, short)
   section.gig
+    if details.logo
+      img.gig-logo(src=details.logo, alt="")
     h3.company
       | #{details.company || details.organization}&nbsp;
       +link(details.website)
