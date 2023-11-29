@@ -38,13 +38,8 @@ ul {
   font-weight: 600;
 }
 
-img {
-  width: 100%;
-  height: 100%;
-}
-
 .logo {
-  height: 4pc;
+  border-radius: 0.6pc;
   left: 0;
   position: absolute;
   top: 0;
@@ -52,9 +47,10 @@ img {
 }
 
 .gig-logo {
-  height: 4pc;
+  border-radius: 0.6pc;
   left: -1in;
   position: absolute;
+  top: 0;
   width: 4pc;
 }
 
@@ -94,6 +90,7 @@ strong {
 
 section {
   margin: 15.4pt 0;
+  position: relative;
 }
 
 .category {
