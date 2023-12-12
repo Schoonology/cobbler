@@ -41,7 +41,7 @@ mixin gig(details, short)
           else
             | Present
     if details.summary
-      p!= details.summary
+      .summary!= details.summary
     if details.highlights
       ul.highlights
         each item in details.highlights
@@ -141,7 +141,7 @@ body
       h2 Volunteering &amp; Community
 
       each job in volunteer
-        section.project
+        section
           +gig(job)
 
   if education && education.length

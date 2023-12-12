@@ -25,7 +25,12 @@ p, table, ul {
 }
 
 ul {
-  padding-left: 30.8pt;
+  padding-left: 0;
+}
+
+li {
+  list-style: circle;
+  margin-bottom: 7.7pt;
 }
 
 .profile-link {
@@ -62,10 +67,12 @@ h1 {
 }
 
 h2 {
-  font-weight: 300;
-  font-size: 22pt;
+  font-size: 16.5pt;
+  letter-spacing: 1pt;
   line-height: 30.8pt;
-  margin: 0;
+  margin: 0 0 0 -1in;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -89,7 +96,7 @@ strong {
 }
 
 section {
-  margin: 15.4pt 0;
+  margin: 23.1pt 0;
   position: relative;
 }
 
@@ -107,8 +114,18 @@ section {
   font-style: italic;
 }
 
+div.time {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gig .summary {
+  margin-top: -15.4pt;
+}
+
 .projects {
-  margin: 30.8pt 0 15.4pt 30.8pt;
+  margin: 23.1pt 0 15.4pt 23.1pt;
 }
 
 .project .company {
